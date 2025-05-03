@@ -39,11 +39,12 @@ public class Columnn {
     public Columnn() {
     }
 
-    public Columnn(UUID id, String name, int position, List<Task> tasks, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Columnn(UUID id, String name, int position, List<Task> tasks, Board board, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.position = position;
         this.tasks = tasks;
+        this.board = board;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -80,6 +81,14 @@ public class Columnn {
         this.tasks = tasks;
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -100,12 +109,12 @@ public class Columnn {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Columnn columnn = (Columnn) o;
-        return position == columnn.position && Objects.equals(id, columnn.id) && Objects.equals(name, columnn.name) && Objects.equals(tasks, columnn.tasks) && Objects.equals(createdAt, columnn.createdAt) && Objects.equals(updatedAt, columnn.updatedAt);
+        return position == columnn.position && Objects.equals(id, columnn.id) && Objects.equals(name, columnn.name) && Objects.equals(tasks, columnn.tasks) && Objects.equals(board, columnn.board) && Objects.equals(createdAt, columnn.createdAt) && Objects.equals(updatedAt, columnn.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, position, tasks, createdAt, updatedAt);
+        return Objects.hash(id, name, position, tasks, board, createdAt, updatedAt);
     }
 
     @Override
@@ -115,6 +124,7 @@ public class Columnn {
                 ", name='" + name + '\'' +
                 ", position=" + position +
                 ", tasks=" + tasks +
+                ", board=" + board +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

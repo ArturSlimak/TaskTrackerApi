@@ -38,39 +38,15 @@ public class Task {
     public Task() {
     }
 
-    public Task(UUID id, String title, String description, TaskPriority priority, Columnn columnn, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Task(UUID id, String title, String description, TaskPriority priority, Columnn column, Board board, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.priority = priority;
-        this.column = columnn;
+        this.column = column;
+        this.board = board;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", priority=" + priority +
-                ", column=" + column +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return Objects.equals(id, task.id) && Objects.equals(title, task.title) && Objects.equals(description, task.description) && priority == task.priority && Objects.equals(column, task.column) && Objects.equals(createdAt, task.createdAt) && Objects.equals(updatedAt, task.updatedAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, priority, column, createdAt, updatedAt);
     }
 
     public UUID getId() {
@@ -105,12 +81,20 @@ public class Task {
         this.priority = priority;
     }
 
-    public Columnn getColumnn() {
+    public Columnn getColumn() {
         return column;
     }
 
-    public void setColumnn(Columnn column) {
+    public void setColumn(Columnn column) {
         this.column = column;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -127,5 +111,31 @@ public class Task {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(id, task.id) && Objects.equals(title, task.title) && Objects.equals(description, task.description) && priority == task.priority && Objects.equals(column, task.column) && Objects.equals(board, task.board) && Objects.equals(createdAt, task.createdAt) && Objects.equals(updatedAt, task.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, priority, column, board, createdAt, updatedAt);
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", priority=" + priority +
+                ", column=" + column +
+                ", board=" + board +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }
