@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: taskstracker_postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: taskstracker
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
