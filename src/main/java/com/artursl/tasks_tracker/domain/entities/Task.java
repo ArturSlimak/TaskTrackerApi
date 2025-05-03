@@ -25,6 +25,10 @@ public class Task {
     @JoinColumn(name = "column_id")
     private Columnn column;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
+
     @Column(nullable = false)
     private LocalDateTime createdAt;
 

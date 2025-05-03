@@ -26,6 +26,10 @@ public class Columnn {
     @OneToMany(mappedBy = "column", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Task> tasks;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
+
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
