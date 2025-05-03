@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -21,8 +22,8 @@ public class Task {
     private TaskPriority priority;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "columnn_id")
-    private Columnn columnn;
+    @JoinColumn(name = "column_id")
+    private Columnn column;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -38,7 +39,7 @@ public class Task {
         this.title = title;
         this.description = description;
         this.priority = priority;
-        this.columnn = columnn;
+        this.column = columnn;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -50,7 +51,7 @@ public class Task {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", priority=" + priority +
-                ", columnn=" + columnn +
+                ", column=" + column +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
@@ -60,12 +61,12 @@ public class Task {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equals(id, task.id) && Objects.equals(title, task.title) && Objects.equals(description, task.description) && priority == task.priority && Objects.equals(columnn, task.columnn) && Objects.equals(createdAt, task.createdAt) && Objects.equals(updatedAt, task.updatedAt);
+        return Objects.equals(id, task.id) && Objects.equals(title, task.title) && Objects.equals(description, task.description) && priority == task.priority && Objects.equals(column, task.column) && Objects.equals(createdAt, task.createdAt) && Objects.equals(updatedAt, task.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, priority, columnn, createdAt, updatedAt);
+        return Objects.hash(id, title, description, priority, column, createdAt, updatedAt);
     }
 
     public UUID getId() {
@@ -101,11 +102,11 @@ public class Task {
     }
 
     public Columnn getColumnn() {
-        return columnn;
+        return column;
     }
 
-    public void setColumnn(Columnn columnn) {
-        this.columnn = columnn;
+    public void setColumnn(Columnn column) {
+        this.column = column;
     }
 
     public LocalDateTime getCreatedAt() {

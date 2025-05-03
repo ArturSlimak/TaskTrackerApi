@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@Table(name = "columns")
 public class Columnn {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -22,7 +23,7 @@ public class Columnn {
 
     private int position;
 
-    @OneToMany(mappedBy = "columnn", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "column", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Task> tasks;
 
     @Column(nullable = false)
