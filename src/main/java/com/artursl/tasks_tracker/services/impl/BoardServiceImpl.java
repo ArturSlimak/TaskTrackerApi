@@ -47,7 +47,11 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDto.GetById getBoardById(UUID id) {
-        return boardMapper.toGetByIdDto(boardRepository.findById(id).orElse(null));
+        //TODO
+        //filter unassignedTask
+        BoardDto.GetById board = boardMapper.toGetByIdDto(boardRepository.findById(id).orElse(null));
+
+        return board;
     }
 
     @Override
@@ -58,5 +62,11 @@ public class BoardServiceImpl implements BoardService {
         entity.setUpdatedAt(now);
         Board savedEntity = boardRepository.save(entity);
         return boardMapper.toGetByIdDto(savedEntity);
+    }
+
+    @Override
+    public BoardDto.GetById updateBoard(UUID id, BoardDto.Update boardDto) {
+
+        return null;
     }
 }
