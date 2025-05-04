@@ -55,7 +55,7 @@ public class BoardServiceImpl implements BoardService {
         //filter unassignedTask
         BoardDto.GetById board = boardMapper.toGetByIdDto(boardRepository.findById(id)
                 .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + id)));
-        board.columns().sort(Comparator.comparingInt(ColumnDto.GetById::position));
+        board.columns().items().sort(Comparator.comparingInt(ColumnDto.GetById::position));
         return board;
     }
 
