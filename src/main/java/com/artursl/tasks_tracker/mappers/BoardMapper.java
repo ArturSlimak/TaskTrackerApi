@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 @Component
 public interface BoardMapper {
-    Board toEntity(BoardDto boardDto);
-    BoardDto toDto(Board board);
+    Board toEntity(BoardDto.Create boardDto);
+    BoardDto.GetAll toGetAllDto(Board board);
+    BoardDto.GetById toGetByIdDto(Board board);
+
+
+
 }

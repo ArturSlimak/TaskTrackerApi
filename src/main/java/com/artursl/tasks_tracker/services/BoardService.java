@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface BoardService {
-    List<BoardDto> getAllBoards();
-    BoardDto getBoardById(UUID id);
-    BoardDto createBoard(BoardDto boardDto);
+    List<BoardDto.GetAll> getAllBoards();
+    BoardDto.GetById getBoardById(UUID id);
+    BoardDto.GetById createBoard(BoardDto.Create boardDto);
 }

@@ -23,18 +23,18 @@ public class BoardController {
     }
 
     @GetMapping
-    public List<BoardDto> getAllBoards() {
+    public List<BoardDto.GetAll> getAllBoards() {
         return boardService.getAllBoards();
     }
 
     @GetMapping("/{id}")
-    public BoardDto getBoardById(@PathVariable UUID id) {
+    public BoardDto.GetById getBoardById(@PathVariable UUID id) {
         return boardService.getBoardById(id);
     }
 
     @PostMapping
-    public ResponseEntity<BoardDto> createBoard(@RequestBody BoardDto boardDto) {
-        BoardDto createdBoard = boardService.createBoard(boardDto);
+    public ResponseEntity<BoardDto.GetById> createBoard(@RequestBody BoardDto.Create boardDto) {
+        BoardDto.GetById createdBoard = boardService.createBoard(boardDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + createdBoard.id().toString()).build().toUri();
         return ResponseEntity.created(location).body(createdBoard);
     }

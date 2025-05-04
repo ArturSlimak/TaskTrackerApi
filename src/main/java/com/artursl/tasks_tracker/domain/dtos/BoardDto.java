@@ -6,10 +6,26 @@ import com.artursl.tasks_tracker.domain.entities.Task;
 import java.util.List;
 import java.util.UUID;
 
-public record BoardDto(
-        UUID id,
-        String name,
-        List<ColumnDto> columns,
-        List<TaskDto> tasks
-) {
+public record BoardDto() {
+    public record Create(
+            String name
+    ){}
+
+    public record GetAll(
+            UUID id,
+            String name
+    ) {}
+
+    public record GetById(
+            UUID id,
+            String name,
+            List<ColumnDto> columns,
+            List<TaskDto> tasks
+    ){}
 }
+
+
+
+
+
+

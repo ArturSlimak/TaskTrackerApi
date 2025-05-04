@@ -7,7 +7,6 @@ import com.artursl.tasks_tracker.repositories.BoardRepository;
 import com.artursl.tasks_tracker.services.BoardService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -26,23 +25,23 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardDto> getAllBoards() {
+    public List<BoardDto.GetAll> getAllBoards() {
         return boardRepository.findAll()
-                .stream().map(boardMapper::toDto).collect(Collectors.toList());
+                .stream().map(boardMapper::toGetAllDto).collect(Collectors.toList());
     }
 
     @Override
-    public BoardDto getBoardById(UUID id) {
-        return boardMapper.toDto(boardRepository.findById(id).orElse(null));
+    public BoardDto.GetById getBoardById(UUID id) {
+        return boardMapper.toGetByIdDto(boardRepository.findById(id).orElse(null));
     }
 
     @Override
-    public BoardDto createBoard(BoardDto boardDto) {
+    public BoardDto.GetById createBoard(BoardDto.Create boardDto) {
         Board entity = boardMapper.toEntity(boardDto);
         OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
         entity.setCreatedAt(now);
         entity.setUpdatedAt(now);
         Board savedEntity = boardRepository.save(entity);
-        return boardMapper.toDto(savedEntity);
+        return boardMapper.toGetByIdDto(savedEntity);
     }
 }
