@@ -13,4 +13,5 @@ public interface BoardService {
     BoardDto.GetById getBoardById(UUID id);
     BoardDto.GetById createBoard(BoardDto.Create boardDto);
     BoardDto.GetById updateBoard(UUID id, BoardDto.Update boardDto);
+    void deleteBoard(UUID id);
 }

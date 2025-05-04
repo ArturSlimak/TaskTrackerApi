@@ -44,8 +44,14 @@ public class BoardController {
         return ResponseEntity.created(location).body(createdBoard);
     }
 
-    @PutMapping("/id")
+    @PutMapping("id")
     public ResponseEntity<BoardDto.GetById> updateBoard(@PathVariable UUID id, @Valid @RequestBody BoardDto.Update boardDto) {
         return ResponseEntity.ok(boardService.updateBoard(id, boardDto));
+    }
+
+    @DeleteMapping("id")
+    public ResponseEntity<Void> deleteBoard(@PathVariable UUID id) {
+        boardService.deleteBoard(id);
+        return ResponseEntity.noContent().build();
     }
 }
