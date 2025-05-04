@@ -1,10 +1,14 @@
 package com.artursl.tasks_tracker.services.impl;
 
+import com.artursl.tasks_tracker.domain.common.PagedResponse;
 import com.artursl.tasks_tracker.domain.dtos.BoardDto;
 import com.artursl.tasks_tracker.domain.entities.Board;
 import com.artursl.tasks_tracker.mappers.BoardMapper;
 import com.artursl.tasks_tracker.repositories.BoardRepository;
 import com.artursl.tasks_tracker.services.BoardService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -25,9 +29,20 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardDto.GetAll> getAllBoards() {
-        return boardRepository.findAll()
-                .stream().map(boardMapper::toGetAllDto).collect(Collectors.toList());
+    public PagedResponse<BoardDto.GetAll> getAllBoards(int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Board> boardPage = boardRepository.findAll(pageable);
+
+        List<BoardDto.GetAll> items = boardPage.getContent()
+                .stream().map(boardMapper::toGetAllDto).toList();
+        return new PagedResponse<>(
+                items,
+                boardPage.getNumber() + 1,
+                boardPage.getSize(),
+                items.size(),
+                boardPage.getTotalElements(),
+                boardPage.getTotalPages()
+        );
     }
 
     @Override

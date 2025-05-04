@@ -1,6 +1,7 @@
 package com.artursl.tasks_tracker.controllers;
 
 
+import com.artursl.tasks_tracker.domain.common.PagedResponse;
 import com.artursl.tasks_tracker.domain.dtos.BoardDto;
 import com.artursl.tasks_tracker.domain.entities.Board;
 import com.artursl.tasks_tracker.mappers.BoardMapper;
@@ -23,8 +24,9 @@ public class BoardController {
     }
 
     @GetMapping
-    public List<BoardDto.GetAll> getAllBoards() {
-        return boardService.getAllBoards();
+    public ResponseEntity<PagedResponse<BoardDto.GetAll>> getAllBoards(@RequestParam(defaultValue = "1") int page,
+                                                                       @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(boardService.getAllBoards(page, size));
     }
 
     @GetMapping("/{id}")
