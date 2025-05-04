@@ -12,6 +12,7 @@ import com.artursl.tasks_tracker.repositories.ColumnRepository;
 import com.artursl.tasks_tracker.services.ColumnService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -94,5 +95,11 @@ public class ColumnServiceImpl implements ColumnService {
 
         columnRepository.saveAll(columns);
         return columnMapper.toGetByIdDto(columnn);
+    }
+
+    @Override
+    @DeleteMapping
+    public void deleteColumn(UUID id) {
+        columnRepository.deleteById(id);
     }
 }

@@ -9,5 +9,4 @@ import java.util.UUID;
 
 @Repository
 public interface ColumnRepository extends JpaRepository<Columnn, UUID> {
-    List<Columnn> findByBoardId(UUID boardsId);
 }

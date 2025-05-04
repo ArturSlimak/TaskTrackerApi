@@ -83,6 +83,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional
     public void deleteBoard(UUID id) {
         boardRepository.deleteById(id);
     }

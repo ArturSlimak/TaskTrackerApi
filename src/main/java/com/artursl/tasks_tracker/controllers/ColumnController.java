@@ -21,7 +21,7 @@ public class ColumnController {
         this.columnService = columnService;
     }
 
-    @PostMapping("/boards/{id}/columns")
+    @PostMapping("boards/{id}/columns")
     public ResponseEntity<ColumnDto.GetById> createColumn(@PathVariable UUID id, @Valid @RequestBody ColumnDto.Create columnDto) {
         ColumnDto.GetById createdColumn = columnService.createColumn(id, columnDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + createdColumn.id()).build().toUri();
@@ -37,5 +37,11 @@ public class ColumnController {
     public ResponseEntity<ColumnDto.GetById> moveColumn(@PathVariable UUID id,@Valid @RequestBody ColumnDto.Move columnDto)
     {
         return ResponseEntity.ok(columnService.move(id, columnDto));
+    }
+
+    @DeleteMapping("columns/{id}")
+    public ResponseEntity<Void> deleteColumn(@PathVariable UUID id) {
+        columnService.deleteColumn(id);
+        return ResponseEntity.noContent().build();
     }
 }
