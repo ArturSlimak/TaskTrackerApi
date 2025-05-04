@@ -3,6 +3,7 @@ package com.artursl.tasks_tracker.services.impl;
 import com.artursl.tasks_tracker.domain.common.PagedResponse;
 import com.artursl.tasks_tracker.domain.dtos.BoardDto;
 import com.artursl.tasks_tracker.domain.entities.Board;
+import com.artursl.tasks_tracker.exceptions.NoSuchEntityExistsException;
 import com.artursl.tasks_tracker.mappers.BoardMapper;
 import com.artursl.tasks_tracker.repositories.BoardRepository;
 import com.artursl.tasks_tracker.services.BoardService;
@@ -15,7 +16,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -49,7 +50,8 @@ public class BoardServiceImpl implements BoardService {
     public BoardDto.GetById getBoardById(UUID id) {
         //TODO
         //filter unassignedTask
-        BoardDto.GetById board = boardMapper.toGetByIdDto(boardRepository.findById(id).orElse(null));
+        BoardDto.GetById board = boardMapper.toGetByIdDto(boardRepository.findById(id)
+                .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + id)));
 
         return board;
     }
@@ -67,7 +69,14 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardDto.GetById updateBoard(UUID id, BoardDto.Update boardDto) {
 
-        return null;
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + id));
+
+        board.setName(boardDto.name());
+        board.setUpdatedAt(OffsetDateTime.now(ZoneOffset.UTC));
+
+        Board updatedEntity = boardRepository.save(board);
+        return boardMapper.toGetByIdDto(updatedEntity);
     }
 
     @Override

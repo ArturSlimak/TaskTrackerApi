@@ -3,8 +3,6 @@ package com.artursl.tasks_tracker.controllers;
 
 import com.artursl.tasks_tracker.domain.common.PagedResponse;
 import com.artursl.tasks_tracker.domain.dtos.BoardDto;
-import com.artursl.tasks_tracker.domain.entities.Board;
-import com.artursl.tasks_tracker.mappers.BoardMapper;
 import com.artursl.tasks_tracker.services.BoardService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -32,7 +29,7 @@ public class BoardController {
         return ResponseEntity.ok(boardService.getAllBoards(page, size));
     }
 
-    @GetMapping("id")
+    @GetMapping("/{id}")
     public BoardDto.GetById getBoardById(@PathVariable UUID id) {
         return boardService.getBoardById(id);
     }
@@ -44,12 +41,12 @@ public class BoardController {
         return ResponseEntity.created(location).body(createdBoard);
     }
 
-    @PutMapping("id")
+    @PutMapping("/{id}")
     public ResponseEntity<BoardDto.GetById> updateBoard(@PathVariable UUID id, @Valid @RequestBody BoardDto.Update boardDto) {
         return ResponseEntity.ok(boardService.updateBoard(id, boardDto));
     }
 
-    @DeleteMapping("id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBoard(@PathVariable UUID id) {
         boardService.deleteBoard(id);
         return ResponseEntity.noContent().build();
