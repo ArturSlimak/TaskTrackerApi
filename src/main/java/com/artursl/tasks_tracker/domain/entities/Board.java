@@ -3,6 +3,7 @@ package com.artursl.tasks_tracker.domain.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -25,15 +26,15 @@ public class Board {
     private List<Task> tasks;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private OffsetDateTime createdAt;
 
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
+    private OffsetDateTime  updatedAt;
 
     public Board() {
     }
 
-    public Board(UUID id, String name, List<Columnn> columns, List<Task> tasks, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Board(UUID id, String name, List<Columnn> columns, List<Task> tasks, OffsetDateTime  createdAt, OffsetDateTime  updatedAt) {
         this.id = id;
         this.name = name;
         this.columns = columns;
@@ -74,19 +75,19 @@ public class Board {
         this.tasks = tasks;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public OffsetDateTime  getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(OffsetDateTime  createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public OffsetDateTime  getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(OffsetDateTime  updatedAt) {
         this.updatedAt = updatedAt;
     }
 
