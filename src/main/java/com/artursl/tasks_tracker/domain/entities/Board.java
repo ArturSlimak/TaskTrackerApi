@@ -1,5 +1,7 @@
 package com.artursl.tasks_tracker.domain.entities;
 
+import com.artursl.tasks_tracker.domain.common.Auditable;
+import com.artursl.tasks_tracker.domain.common.AuditingEntityListener;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -9,8 +11,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "boards")
-public class Board {
+public class Board implements Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(unique = true, nullable = false, updatable = false)

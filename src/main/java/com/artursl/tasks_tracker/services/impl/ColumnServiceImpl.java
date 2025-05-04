@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -51,9 +50,6 @@ public class ColumnServiceImpl implements ColumnService {
                 });
 
         Columnn entity = columnMapper.toEntity(columnDto);
-        OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
-        entity.setCreatedAt(now);
-        entity.setUpdatedAt(now);
         entity.setBoard(board);
         Columnn savedEntity = columnRepository.save(entity);
 
@@ -65,7 +61,6 @@ public class ColumnServiceImpl implements ColumnService {
     public ColumnDto.GetById updateColumn(UUID id, ColumnDto.Update columnDto) {
         Columnn entity = columnRepository.findById(id).orElseThrow(() -> new NoSuchEntityExistsException("No column found with id: " + id));
         entity.setName(columnDto.name());
-        entity.setUpdatedAt(OffsetDateTime.now(ZoneOffset.UTC));
 
         Columnn updatedColumn = columnRepository.save(entity);
         return columnMapper.toGetByIdDto(updatedColumn);

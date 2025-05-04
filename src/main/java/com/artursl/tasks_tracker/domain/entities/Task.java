@@ -1,14 +1,17 @@
 package com.artursl.tasks_tracker.domain.entities;
 
+import com.artursl.tasks_tracker.domain.common.Auditable;
+import com.artursl.tasks_tracker.domain.common.AuditingEntityListener;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "tasks")
-public class Task {
+public class Task  implements Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(unique = true, nullable = false, updatable = false)
@@ -30,15 +33,15 @@ public class Task {
     private Board board;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private OffsetDateTime createdAt;
 
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
+    private OffsetDateTime updatedAt;
 
     public Task() {
     }
 
-    public Task(UUID id, String title, String description, TaskPriority priority, Columnn column, Board board, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Task(UUID id, String title, String description, TaskPriority priority, Columnn column, Board board, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -97,19 +100,19 @@ public class Task {
         this.board = board;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
