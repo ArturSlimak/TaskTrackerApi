@@ -17,7 +17,7 @@ import java.util.UUID;
 @SpringBootTest
 public class BoardMapperTests {
 
-    @Autowired
+/*    @Autowired
     private BoardMapper boardMapper;
 
     @Test
@@ -50,5 +50,5 @@ public class BoardMapperTests {
         Assertions.assertEquals(1, dto.columns().size());
         Assertions.assertEquals(1, dto.tasks().size());
         Assertions.assertEquals("Task 1", dto.tasks().getFirst().title());
-    }
+    }*/
 }

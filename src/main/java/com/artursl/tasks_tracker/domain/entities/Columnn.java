@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -21,6 +21,7 @@ public class Columnn {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private int position;
 
     @OneToMany(mappedBy = "column", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
@@ -31,15 +32,15 @@ public class Columnn {
     private Board board;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private OffsetDateTime createdAt;
 
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
+    private OffsetDateTime updatedAt;
 
     public Columnn() {
     }
 
-    public Columnn(UUID id, String name, int position, List<Task> tasks, Board board, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Columnn(UUID id, String name, int position, List<Task> tasks, Board board, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.position = position;
@@ -89,19 +90,19 @@ public class Columnn {
         this.board = board;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

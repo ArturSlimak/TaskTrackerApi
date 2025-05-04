@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -20,9 +21,9 @@ import java.util.UUID;
 
 @Service
 public class BoardServiceImpl implements BoardService {
+
     private final BoardRepository boardRepository;
     private final BoardMapper boardMapper;
-
 
     public BoardServiceImpl(BoardRepository boardRepository, BoardMapper boardMapper) {
         this.boardRepository = boardRepository;
@@ -57,6 +58,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional
     public BoardDto.GetById createBoard(BoardDto.Create boardDto) {
         Board entity = boardMapper.toEntity(boardDto);
         OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
@@ -67,6 +69,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional
     public BoardDto.GetById updateBoard(UUID id, BoardDto.Update boardDto) {
 
         Board board = boardRepository.findById(id)

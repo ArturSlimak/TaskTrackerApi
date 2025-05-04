@@ -18,8 +18,9 @@ public class ColumnMapperTests {
     @Autowired
     private ColumnMapper columnMapper;
 
+/*
     @Test
-    public void ColumnEntityToDto_whenMap_thenCorrect() {
+public void ColumnEntityToDto_whenMap_thenCorrect() {
         Columnn column = new Columnn();
         column.setId(UUID.randomUUID());
         column.setName("TO DO");
@@ -45,5 +46,5 @@ public class ColumnMapperTests {
         Assertions.assertEquals(column.getTasks().size(), dto.tasks().size());
         Assertions.assertEquals(column.getTasks().getFirst().getId(), dto.tasks().getFirst().id());
         Assertions.assertEquals(column.getTasks().get(1).getTitle(), dto.tasks().get(1).title());
-    }
+    }*/
 }

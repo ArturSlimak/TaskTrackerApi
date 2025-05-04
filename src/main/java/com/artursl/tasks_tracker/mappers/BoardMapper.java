@@ -11,7 +11,4 @@ public interface BoardMapper {
     Board toEntity(BoardDto.Create boardDto);
     BoardDto.GetAll toGetAllDto(Board board);
     BoardDto.GetById toGetByIdDto(Board board);
-
-
-
 }

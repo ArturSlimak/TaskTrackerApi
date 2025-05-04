@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 
 import java.util.stream.Collectors;
 
@@ -41,8 +40,34 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DoubleColumnPositionException.class)
+    public ResponseEntity<ErrorResponse> handleDoubleColumnPositionException(DoubleColumnPositionException ex) {
+        String details = ex.getMessage();
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                "Creation failed",
+                details
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+
+    }
+
+
+    @ExceptionHandler(ColumnPositionIsOutOfBoardSizeException.class)
+    public ResponseEntity<ErrorResponse> handleColumnPositionIsOutOfBoardSizeException(ColumnPositionIsOutOfBoardSizeException ex) {
+        String details = ex.getMessage();
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                "Moving failed",
+                details
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+
+    }
+
+
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGeneric(Exception ignoredEx) {
+    public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 "Unexpected error occurred",

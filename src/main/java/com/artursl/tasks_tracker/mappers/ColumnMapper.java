@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 @Component
 public interface ColumnMapper {
-    Columnn toEntity(ColumnDto columnDto);
+    Columnn toEntity(ColumnDto.Create columnDto);
     ColumnDto toDto(Columnn columnn);
+    ColumnDto.GetById toGetByIdDto(Columnn columnn);
 }
