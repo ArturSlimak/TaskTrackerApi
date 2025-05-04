@@ -9,7 +9,7 @@ import java.util.UUID;
 public record BoardDto(
         UUID id,
         String name,
-        List<Columnn> columns,
-        List<Task> tasks
+        List<ColumnDto> columns,
+        List<TaskDto> tasks
 ) {
 }

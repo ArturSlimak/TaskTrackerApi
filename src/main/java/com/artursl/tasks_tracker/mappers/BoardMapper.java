@@ -3,9 +3,11 @@ package com.artursl.tasks_tracker.mappers;
 import com.artursl.tasks_tracker.domain.dtos.BoardDto;
 import com.artursl.tasks_tracker.domain.entities.Board;
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
-@Mapper
+@Mapper(componentModel = "spring")
+@Component
 public interface BoardMapper {
-    Board toModel(BoardDto boardDto);
+    Board toEntity(BoardDto boardDto);
     BoardDto toDto(Board board);
 }

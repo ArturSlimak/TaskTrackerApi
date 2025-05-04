@@ -9,6 +9,6 @@ public record ColumnDto(
         UUID id,
         String name,
         int position,
-        List<Task> tasks
+        List<TaskDto> tasks
 ) {
 }

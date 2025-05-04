@@ -21,7 +21,7 @@ public class Board {
     @OneToMany(mappedBy = "board" , cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Columnn> columns;
 
-    @OneToMany(mappedBy = "column", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "board", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Task> tasks;
 
     @Column(nullable = false)
