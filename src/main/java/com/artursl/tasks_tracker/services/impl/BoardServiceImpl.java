@@ -2,6 +2,7 @@ package com.artursl.tasks_tracker.services.impl;
 
 import com.artursl.tasks_tracker.domain.common.PagedResponse;
 import com.artursl.tasks_tracker.domain.dtos.BoardDto;
+import com.artursl.tasks_tracker.domain.dtos.ColumnDto;
 import com.artursl.tasks_tracker.domain.entities.Board;
 import com.artursl.tasks_tracker.exceptions.NoSuchEntityExistsException;
 import com.artursl.tasks_tracker.mappers.BoardMapper;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,7 +55,7 @@ public class BoardServiceImpl implements BoardService {
         //filter unassignedTask
         BoardDto.GetById board = boardMapper.toGetByIdDto(boardRepository.findById(id)
                 .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + id)));
-
+        board.columns().sort(Comparator.comparingInt(ColumnDto.GetById::position));
         return board;
     }
 
@@ -61,9 +63,6 @@ public class BoardServiceImpl implements BoardService {
     @Transactional
     public BoardDto.GetById createBoard(BoardDto.Create boardDto) {
         Board entity = boardMapper.toEntity(boardDto);
-        OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
-        entity.setCreatedAt(now);
-        entity.setUpdatedAt(now);
         Board savedEntity = boardRepository.save(entity);
         return boardMapper.toGetByIdDto(savedEntity);
     }
@@ -76,8 +75,6 @@ public class BoardServiceImpl implements BoardService {
                 .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + id));
 
         board.setName(boardDto.name());
-        board.setUpdatedAt(OffsetDateTime.now(ZoneOffset.UTC));
-
         Board updatedEntity = boardRepository.save(board);
         return boardMapper.toGetByIdDto(updatedEntity);
     }
