@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 @Component
 public interface TaskMapper {
-    Task toEntity(TaskDto taskDto);
+    Task toEntity(TaskDto.Create taskDto);
     TaskDto toDto(Task task);
+    TaskDto.GetById toGetById(Task task);
 }

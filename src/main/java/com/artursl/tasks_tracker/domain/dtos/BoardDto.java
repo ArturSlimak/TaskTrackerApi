@@ -25,7 +25,7 @@ public record BoardDto() {
             UUID id,
             String name,
             ListResponse<ColumnDto.GetById> columns,
-            List<TaskDto> tasks
+            List<TaskDto.GetById> tasks
     ) {
     }
 
