@@ -9,6 +9,7 @@ import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 @Component
@@ -21,7 +22,7 @@ public interface BoardMapper {
 
     default ListResponse<ColumnDto.GetById> mapColumnToListResponse(List<Columnn> columns) {
         if (columns == null) return new ListResponse<>(List.of());
-        var items = columns.stream().map(this::mapColumnToDto).toList();
+        var items = columns.stream().map(this::mapColumnToDto).collect(Collectors.toList());
         return new ListResponse<>(items);
     }
 
