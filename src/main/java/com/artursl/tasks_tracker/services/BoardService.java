@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface BoardService {
     PagedResponse<BoardDto.GetAll> getAllBoards(int page, int size);
     BoardDto.GetById getBoardById(UUID id);
-    BoardDto.GetById createBoard(BoardDto.Create boardDto);
-    BoardDto.GetById updateBoard(UUID id, BoardDto.Update boardDto);
+    BoardDto.Created createBoard(BoardDto.Create boardDto);
+    BoardDto.Updated updateBoard(UUID id, BoardDto.Update boardDto);
     void deleteBoard(UUID id);
 }

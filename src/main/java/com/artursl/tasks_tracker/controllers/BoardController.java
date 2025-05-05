@@ -35,14 +35,14 @@ public class BoardController {
     }
 
     @PostMapping
-    public ResponseEntity<BoardDto.GetById> createBoard(@Valid @RequestBody BoardDto.Create boardDto) {
-        BoardDto.GetById createdBoard = boardService.createBoard(boardDto);
+    public ResponseEntity<BoardDto.Created> createBoard(@Valid @RequestBody BoardDto.Create boardDto) {
+        BoardDto.Created createdBoard = boardService.createBoard(boardDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + createdBoard.id().toString()).build().toUri();
         return ResponseEntity.created(location).body(createdBoard);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BoardDto.GetById> updateBoard(@PathVariable UUID id, @Valid @RequestBody BoardDto.Update boardDto) {
+    public ResponseEntity<BoardDto.Updated> updateBoard(@PathVariable UUID id, @Valid @RequestBody BoardDto.Update boardDto) {
         return ResponseEntity.ok(boardService.updateBoard(id, boardDto));
     }
 

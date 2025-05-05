@@ -61,22 +61,22 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @Transactional
-    public BoardDto.GetById createBoard(BoardDto.Create boardDto) {
+    public BoardDto.Created createBoard(BoardDto.Create boardDto) {
         Board entity = boardMapper.toEntity(boardDto);
         Board savedEntity = boardRepository.save(entity);
-        return boardMapper.toGetByIdDto(savedEntity);
+        return boardMapper.toCreatedDto(savedEntity);
     }
 
     @Override
     @Transactional
-    public BoardDto.GetById updateBoard(UUID id, BoardDto.Update boardDto) {
+    public BoardDto.Updated updateBoard(UUID id, BoardDto.Update boardDto) {
 
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + id));
 
         board.setName(boardDto.name());
         Board updatedEntity = boardRepository.save(board);
-        return boardMapper.toGetByIdDto(updatedEntity);
+        return boardMapper.toUpdatedDto(updatedEntity);
     }
 
     @Override

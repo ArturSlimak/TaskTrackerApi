@@ -9,8 +9,15 @@ import java.util.List;
 import java.util.UUID;
 
 public record BoardDto() {
+
     public record Create(
             @NotEmpty
+            String name
+    ) {
+    }
+
+    public record Created(
+            UUID id,
             String name
     ) {
     }
@@ -31,6 +38,12 @@ public record BoardDto() {
 
     public record Update(
             @NotEmpty
+            String name
+    ) {
+    }
+
+    public record Updated(
+            UUID id,
             String name
     ) {
     }

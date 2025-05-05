@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 @Component
 public interface BoardMapper {
     Board toEntity(BoardDto.Create boardDto);
-
     BoardDto.GetAll toGetAllDto(Board board);
-
     BoardDto.GetById toGetByIdDto(Board board);
+    BoardDto.Updated toUpdatedDto(Board board);
+    BoardDto.Created toCreatedDto(Board board);
 
     default ListResponse<ColumnDto.GetById> mapColumnToListResponse(List<Columnn> columns) {
         if (columns == null) return new ListResponse<>(List.of());
