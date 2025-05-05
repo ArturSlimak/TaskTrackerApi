@@ -33,5 +33,10 @@ public class TaskController {
         return ResponseEntity.ok(taskService.updateTask(id, taskDto));
     }
 
+    @PatchMapping("tasks/{id}/move")
+    public ResponseEntity<TaskDto.GetById> moveTask(@PathVariable UUID id, @Valid @RequestBody TaskDto.Move taskDto) {
+        return ResponseEntity.ok(taskService.move(id, taskDto));
+    }
+
 
 }

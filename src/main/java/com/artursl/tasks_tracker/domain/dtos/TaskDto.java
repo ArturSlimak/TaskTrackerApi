@@ -4,6 +4,8 @@ import com.artursl.tasks_tracker.domain.entities.TaskPriority;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
+import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -27,6 +29,7 @@ public record TaskDto(
             TaskPriority priority
     ) {
     }
+
     public record Created(
             UUID id,
             String title,
@@ -52,4 +55,10 @@ public record TaskDto(
     }
 
 
+    public record Move(
+            @Nullable
+            UUID columnId
+    ) {
+
+    }
 }

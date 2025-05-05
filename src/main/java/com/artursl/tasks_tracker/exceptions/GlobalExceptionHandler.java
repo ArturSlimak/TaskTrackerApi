@@ -68,6 +68,20 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(NotTheSameBoardException.class)
+    public ResponseEntity<ErrorResponse> handleNotTheSameBoardException(NotTheSameBoardException ex) {
+        String details = ex.getMessage();
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                "Moving failed",
+                details
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+
+    }
+
+
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
