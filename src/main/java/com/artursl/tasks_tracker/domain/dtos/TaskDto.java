@@ -28,4 +28,13 @@ public record TaskDto(
             TaskPriority priority
     ) {
     }
+
+    public record Update(
+            @NotEmpty
+            String title,
+            String description,
+
+            TaskPriority priority
+    ) {
+    }
 }

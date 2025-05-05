@@ -6,4 +6,5 @@ import java.util.UUID;
 
 public interface TaskService {
     TaskDto.GetById createTask(UUID boardId, TaskDto.Create taskDto);
+    TaskDto.GetById updateTask(UUID id, TaskDto.Update taskDto);
 }

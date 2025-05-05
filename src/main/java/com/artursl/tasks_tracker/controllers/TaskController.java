@@ -2,6 +2,7 @@ package com.artursl.tasks_tracker.controllers;
 
 import com.artursl.tasks_tracker.domain.dtos.TaskDto;
 import com.artursl.tasks_tracker.services.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,16 @@ public class TaskController {
     }
 
     @PostMapping("boards/{id}/tasks")
-    public ResponseEntity<TaskDto.GetById> createTask(@PathVariable UUID id, @RequestBody TaskDto.Create taskDto) {
+    public ResponseEntity<TaskDto.GetById> createTask(@PathVariable UUID id, @Valid @RequestBody TaskDto.Create taskDto) {
         TaskDto.GetById createdTask = taskService.createTask(id, taskDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + createdTask.id()).build().toUri();
         return ResponseEntity.created(location).body(createdTask);
     }
+
+    @PutMapping("/tasks/{id}")
+    public ResponseEntity<TaskDto.GetById> updateTask(@PathVariable UUID id, @Valid @RequestBody TaskDto.Update taskDto) {
+        return ResponseEntity.ok(taskService.updateTask(id, taskDto));
+    }
+
+
 }

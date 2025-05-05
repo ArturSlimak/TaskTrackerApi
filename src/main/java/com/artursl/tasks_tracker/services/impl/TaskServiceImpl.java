@@ -36,4 +36,15 @@ public class TaskServiceImpl implements TaskService {
         Task savedEntity = taskRepository.save(entity);
         return taskMapper.toGetById(savedEntity);
     }
+
+    @Override
+    public TaskDto.GetById updateTask(UUID id, TaskDto.Update taskDto) {
+        Task entity = taskRepository.findById(id).orElseThrow(() -> new NoSuchEntityExistsException("No task found with id: " + id));
+        entity.setTitle(taskDto.title());
+        entity.setDescription(taskDto.description());
+        entity.setPriority(taskDto.priority());
+
+        Task updatedEntity = taskRepository.save(entity);
+        return taskMapper.toGetById(updatedEntity);
+    }
 }
