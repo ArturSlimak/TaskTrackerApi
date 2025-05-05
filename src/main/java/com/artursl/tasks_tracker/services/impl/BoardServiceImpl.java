@@ -51,12 +51,13 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDto.GetById getBoardById(UUID id) {
-        //TODO
-        //filter unassignedTask
-        BoardDto.GetById board = boardMapper.toGetByIdDto(boardRepository.findById(id)
-                .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + id)));
-        board.columns().items().sort(Comparator.comparingInt(ColumnDto.GetById::position));
-        return board;
+        Board entity = boardRepository.findById(id).orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + id));
+        entity.getTasks().removeIf(task -> task.getColumn() != null);
+
+        BoardDto.GetById boardDto = boardMapper.toGetByIdDto(entity);
+        boardDto.columns().items().sort(Comparator.comparingInt(ColumnDto.GetById::position));
+
+        return boardDto;
     }
 
     @Override
