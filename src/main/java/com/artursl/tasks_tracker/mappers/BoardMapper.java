@@ -25,10 +25,10 @@ public interface BoardMapper extends CommonMappers {
         return mapListToListResponse(columns, this::mapColumnToDto);
     }
 
-    default ListResponse<TaskDto.GetById> mapTaskToListResponse(List<Task> tasks) {
-        return mapListToListResponse(tasks, this::mapTaskToDto);
+    default ListResponse<TaskDto.GetOverviewDto> mapTaskToListResponse(List<Task> tasks) {
+        return mapListToListResponse(tasks, this::mapTaskToOverviewDto);
     }
 
     ColumnDto.GetById mapColumnToDto(Columnn column);
-    TaskDto.GetById mapTaskToDto(Task task);
+    TaskDto.GetOverviewDto mapTaskToOverviewDto(Task task);
 }

@@ -6,10 +6,8 @@ import com.artursl.tasks_tracker.domain.dtos.TaskDto;
 import com.artursl.tasks_tracker.domain.entities.Columnn;
 import com.artursl.tasks_tracker.domain.entities.Task;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ColumnMapper extends CommonMappers  {
@@ -19,8 +17,8 @@ public interface ColumnMapper extends CommonMappers  {
     ColumnDto.Updated toUpdatedDto(Columnn columnn);
     ColumnDto.Created toCreatedDto(Columnn columnn);
 
-    default ListResponse<TaskDto.GetById> mapTaskToListResponse(List<Task> tasks) {
-        return mapListToListResponse(tasks, this::mapTaskToDto);
+    default ListResponse<TaskDto.GetOverviewDto> mapTaskToListResponse(List<Task> tasks) {
+        return mapListToListResponse(tasks, this::mapTaskToOverviewDto);
     }
-    TaskDto.GetById mapTaskToDto(Task task);
+    TaskDto.GetOverviewDto mapTaskToOverviewDto(Task task);
 }

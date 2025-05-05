@@ -32,7 +32,7 @@ public record BoardDto() {
             UUID id,
             String name,
             ListResponse<ColumnDto.GetById> columns,
-            ListResponse<TaskDto.GetById> tasks
+            ListResponse<TaskDto.GetOverviewDto> tasks
     ) {
     }
 

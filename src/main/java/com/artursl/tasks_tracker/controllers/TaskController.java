@@ -21,6 +21,11 @@ public class TaskController {
         this.taskService = taskService;
     }
 
+    @GetMapping("tasks/{id}")
+    public ResponseEntity<TaskDto.GetById> getTaskById(@PathVariable UUID id) {
+        return ResponseEntity.ok(taskService.getTaskById(id));
+    }
+
     @PostMapping("boards/{id}/tasks")
     public ResponseEntity<TaskDto.Created> createTask(@PathVariable UUID id, @Valid @RequestBody TaskDto.Create taskDto) {
         TaskDto.Created createdTask = taskService.createTask(id, taskDto);

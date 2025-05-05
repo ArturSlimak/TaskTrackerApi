@@ -33,6 +33,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public TaskDto.GetById getTaskById(UUID id) {
+        Task task = taskRepository.findById(id).orElseThrow(() -> new NoSuchEntityExistsException("No task found with id: " + id));
+        return taskMapper.toGetById(task);
+    }
+
+    @Override
     @Transactional
     public TaskDto.Created createTask(UUID boardId, TaskDto.Create taskDto) {
         Board board = boardRepository.findById(boardId)

@@ -12,7 +12,7 @@ public record ColumnDto() {
             UUID id,
             String name,
             int position,
-            ListResponse<TaskDto.GetById> tasks
+            ListResponse<TaskDto.GetOverviewDto> tasks
     ) {
     }
 

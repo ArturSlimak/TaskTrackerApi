@@ -14,6 +14,14 @@ public record TaskDto(
 
 ) {
 
+    public record GetOverviewDto(
+            UUID id,
+            String title,
+            String description,
+            TaskPriority priority
+    ) {
+    }
+
     public record GetById(
             UUID id,
             String title,
