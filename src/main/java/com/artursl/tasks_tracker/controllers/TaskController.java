@@ -28,7 +28,7 @@ public class TaskController {
         return ResponseEntity.created(location).body(createdTask);
     }
 
-    @PutMapping("/tasks/{id}")
+    @PutMapping("tasks/{id}")
     public ResponseEntity<TaskDto.Updated> updateTask(@PathVariable UUID id, @Valid @RequestBody TaskDto.Update taskDto) {
         return ResponseEntity.ok(taskService.updateTask(id, taskDto));
     }
@@ -38,5 +38,11 @@ public class TaskController {
         return ResponseEntity.ok(taskService.move(id, taskDto));
     }
 
+    @DeleteMapping("tasks/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable UUID id) {
+        taskService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+
+    }
 
 }

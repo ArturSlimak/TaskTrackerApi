@@ -9,4 +9,5 @@ public interface TaskService {
     TaskDto.Created createTask(UUID boardId, TaskDto.Create taskDto);
     TaskDto.Updated updateTask(UUID id, TaskDto.Update taskDto);
     TaskDto.GetById move(UUID id, TaskDto.Move taskDto);
+    void deleteTask(UUID id);
 }

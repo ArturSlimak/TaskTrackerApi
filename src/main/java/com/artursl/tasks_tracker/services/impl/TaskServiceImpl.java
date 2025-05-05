@@ -77,4 +77,10 @@ public class TaskServiceImpl implements TaskService {
         return taskMapper.toGetById(taskRepository.save(entity));
 
     }
+
+    @Override
+    @Transactional
+    public void deleteTask(UUID id) {
+        taskRepository.deleteById(id);
+    }
 }
