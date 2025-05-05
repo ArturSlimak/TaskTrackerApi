@@ -30,8 +30,8 @@ public class BoardController {
     }
 
     @GetMapping("/{id}")
-    public BoardDto.GetById getBoardById(@PathVariable UUID id) {
-        return boardService.getBoardById(id);
+    public ResponseEntity<BoardDto.GetById> getBoardById(@PathVariable UUID id) {
+        return ResponseEntity.ok(boardService.getBoardById(id));
     }
 
     @PostMapping
