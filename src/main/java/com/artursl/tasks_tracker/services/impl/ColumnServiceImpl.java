@@ -38,9 +38,9 @@ public class ColumnServiceImpl implements ColumnService {
 
     @Override
     @Transactional
-    public ColumnDto.GetById createColumn(UUID id, ColumnDto.Create columnDto) {
-        Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + id));
+    public ColumnDto.GetById createColumn(UUID boardId, ColumnDto.Create columnDto) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + boardId));
 
         board.getColumns().stream()
                 .filter(column -> column.getPosition() == columnDto.position())
