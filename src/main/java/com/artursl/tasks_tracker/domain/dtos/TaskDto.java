@@ -24,7 +24,13 @@ public record TaskDto(
             @NotEmpty
             String title,
             String description,
-
+            TaskPriority priority
+    ) {
+    }
+    public record Created(
+            UUID id,
+            String title,
+            String description,
             TaskPriority priority
     ) {
     }
@@ -33,8 +39,17 @@ public record TaskDto(
             @NotEmpty
             String title,
             String description,
-
             TaskPriority priority
     ) {
     }
+
+    public record Updated(
+            UUID id,
+            String title,
+            String description,
+            TaskPriority priority
+    ) {
+    }
+
+
 }

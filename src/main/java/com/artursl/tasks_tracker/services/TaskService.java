@@ -5,6 +5,6 @@ import com.artursl.tasks_tracker.domain.dtos.TaskDto;
 import java.util.UUID;
 
 public interface TaskService {
-    TaskDto.GetById createTask(UUID boardId, TaskDto.Create taskDto);
-    TaskDto.GetById updateTask(UUID id, TaskDto.Update taskDto);
+    TaskDto.Created createTask(UUID boardId, TaskDto.Create taskDto);
+    TaskDto.Updated updateTask(UUID id, TaskDto.Update taskDto);
 }

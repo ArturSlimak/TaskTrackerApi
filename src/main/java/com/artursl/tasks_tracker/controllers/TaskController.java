@@ -22,14 +22,14 @@ public class TaskController {
     }
 
     @PostMapping("boards/{id}/tasks")
-    public ResponseEntity<TaskDto.GetById> createTask(@PathVariable UUID id, @Valid @RequestBody TaskDto.Create taskDto) {
-        TaskDto.GetById createdTask = taskService.createTask(id, taskDto);
+    public ResponseEntity<TaskDto.Created> createTask(@PathVariable UUID id, @Valid @RequestBody TaskDto.Create taskDto) {
+        TaskDto.Created createdTask = taskService.createTask(id, taskDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + createdTask.id()).build().toUri();
         return ResponseEntity.created(location).body(createdTask);
     }
 
     @PutMapping("/tasks/{id}")
-    public ResponseEntity<TaskDto.GetById> updateTask(@PathVariable UUID id, @Valid @RequestBody TaskDto.Update taskDto) {
+    public ResponseEntity<TaskDto.Updated> updateTask(@PathVariable UUID id, @Valid @RequestBody TaskDto.Update taskDto) {
         return ResponseEntity.ok(taskService.updateTask(id, taskDto));
     }
 

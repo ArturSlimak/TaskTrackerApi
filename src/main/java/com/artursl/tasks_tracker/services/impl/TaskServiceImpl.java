@@ -27,24 +27,24 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
-    public TaskDto.GetById createTask(UUID boardId, TaskDto.Create taskDto) {
+    public TaskDto.Created createTask(UUID boardId, TaskDto.Create taskDto) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + boardId));
 
         Task entity = taskMapper.toEntity(taskDto);
         entity.setBoard(board);
         Task savedEntity = taskRepository.save(entity);
-        return taskMapper.toGetById(savedEntity);
+        return taskMapper.toCreatedDto(savedEntity);
     }
 
     @Override
-    public TaskDto.GetById updateTask(UUID id, TaskDto.Update taskDto) {
+    public TaskDto.Updated updateTask(UUID id, TaskDto.Update taskDto) {
         Task entity = taskRepository.findById(id).orElseThrow(() -> new NoSuchEntityExistsException("No task found with id: " + id));
         entity.setTitle(taskDto.title());
         entity.setDescription(taskDto.description());
         entity.setPriority(taskDto.priority());
 
         Task updatedEntity = taskRepository.save(entity);
-        return taskMapper.toGetById(updatedEntity);
+        return taskMapper.toUpdatedDto(updatedEntity);
     }
 }

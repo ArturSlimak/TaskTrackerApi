@@ -11,4 +11,6 @@ public interface TaskMapper {
     Task toEntity(TaskDto.Create taskDto);
     TaskDto toDto(Task task);
     TaskDto.GetById toGetById(Task task);
+    TaskDto.Created toCreatedDto(Task task);
+    TaskDto.Updated toUpdatedDto(Task task);
 }
