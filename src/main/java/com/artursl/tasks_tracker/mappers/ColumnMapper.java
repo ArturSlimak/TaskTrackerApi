@@ -11,4 +11,7 @@ public interface ColumnMapper {
     Columnn toEntity(ColumnDto.Create columnDto);
     ColumnDto toDto(Columnn columnn);
     ColumnDto.GetById toGetByIdDto(Columnn columnn);
+    ColumnDto.Updated toUpdatedDto(Columnn columnn);
+    ColumnDto.Created toCreatedDto(Columnn columnn);
+
 }

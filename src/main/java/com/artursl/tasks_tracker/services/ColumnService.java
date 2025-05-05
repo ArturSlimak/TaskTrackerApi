@@ -6,8 +6,8 @@ import jakarta.validation.Valid;
 import java.util.UUID;
 
 public interface ColumnService {
-    ColumnDto.GetById createColumn(UUID boardId, ColumnDto.Create columnDto);
-    ColumnDto.GetById updateColumn(UUID id, ColumnDto.Update columnDto);
+    ColumnDto.Created createColumn(UUID boardId, ColumnDto.Create columnDto);
+    ColumnDto.Updated updateColumn(UUID id, ColumnDto.Update columnDto);
     ColumnDto.GetById move(UUID id, ColumnDto.Move columnDto);
     void deleteColumn(UUID id);
 }

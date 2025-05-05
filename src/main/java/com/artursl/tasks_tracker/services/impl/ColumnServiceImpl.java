@@ -38,7 +38,7 @@ public class ColumnServiceImpl implements ColumnService {
 
     @Override
     @Transactional
-    public ColumnDto.GetById createColumn(UUID boardId, ColumnDto.Create columnDto) {
+    public ColumnDto.Created createColumn(UUID boardId, ColumnDto.Create columnDto) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new NoSuchEntityExistsException("No board found with id: " + boardId));
 
@@ -53,17 +53,17 @@ public class ColumnServiceImpl implements ColumnService {
         entity.setBoard(board);
         Columnn savedEntity = columnRepository.save(entity);
 
-        return columnMapper.toGetByIdDto(savedEntity);
+        return columnMapper.toCreatedDto(savedEntity);
     }
 
     @Override
     @Transactional
-    public ColumnDto.GetById updateColumn(UUID id, ColumnDto.Update columnDto) {
+    public ColumnDto.Updated updateColumn(UUID id, ColumnDto.Update columnDto) {
         Columnn entity = columnRepository.findById(id).orElseThrow(() -> new NoSuchEntityExistsException("No column found with id: " + id));
         entity.setName(columnDto.name());
 
         Columnn updatedColumn = columnRepository.save(entity);
-        return columnMapper.toGetByIdDto(updatedColumn);
+        return columnMapper.toUpdatedDto(updatedColumn);
     }
 
     @Override

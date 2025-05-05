@@ -25,8 +25,20 @@ public record ColumnDto() {
     ) {
     }
 
+    public record Created(
+            UUID id,
+            String name,
+            int position) {
+    }
+
     public record Update(
             @NotEmpty
+            String name
+    ) {
+    }
+
+    public record Updated(
+            UUID id,
             String name
     ) {
     }
@@ -35,4 +47,6 @@ public record ColumnDto() {
             int position
     ) {
     }
+
+
 }

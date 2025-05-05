@@ -22,14 +22,14 @@ public class ColumnController {
     }
 
     @PostMapping("boards/{id}/columns")
-    public ResponseEntity<ColumnDto.GetById> createColumn(@PathVariable UUID id, @Valid @RequestBody ColumnDto.Create columnDto) {
-        ColumnDto.GetById createdColumn = columnService.createColumn(id, columnDto);
+    public ResponseEntity<ColumnDto.Created> createColumn(@PathVariable UUID id, @Valid @RequestBody ColumnDto.Create columnDto) {
+        ColumnDto.Created createdColumn = columnService.createColumn(id, columnDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/" + createdColumn.id()).build().toUri();
         return ResponseEntity.created(location).body(createdColumn);
     }
 
     @PutMapping("columns/{id}")
-    public ResponseEntity<ColumnDto.GetById> updateColumn(@PathVariable UUID id, @Valid @RequestBody ColumnDto.Update columnDto) {
+    public ResponseEntity<ColumnDto.Updated> updateColumn(@PathVariable UUID id, @Valid @RequestBody ColumnDto.Update columnDto) {
         return ResponseEntity.ok(columnService.updateColumn(id, columnDto));
     }
 
