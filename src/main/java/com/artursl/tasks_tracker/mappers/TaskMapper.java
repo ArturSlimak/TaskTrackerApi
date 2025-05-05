@@ -6,7 +6,6 @@ import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
-@Component
 public interface TaskMapper {
     Task toEntity(TaskDto.Create taskDto);
     TaskDto toDto(Task task);
