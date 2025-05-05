@@ -4,7 +4,6 @@ import com.artursl.tasks_tracker.domain.common.Auditable;
 import com.artursl.tasks_tracker.domain.common.AuditingEntityListener;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -12,49 +11,39 @@ import java.util.UUID;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "boards")
-public class Board implements Auditable {
+@Table(name = "users")
+public class User implements Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(unique = true, nullable = false, updatable = false)
     private UUID id;
 
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "board" , cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
-    private List<Columnn> columns;
+    @Column(unique = true, nullable = false)
+    private String email;
 
-    @OneToMany(mappedBy = "board", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
-    private List<Task> tasks;
+    @Column(nullable = false)
+    private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by_id", nullable = false)
-    private User createdBy;
+    @OneToMany(mappedBy = "createdBy", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    private List<Board> boards;
 
     @Column(nullable = false)
     private OffsetDateTime createdAt;
 
     @Column(nullable = false)
     private OffsetDateTime  updatedAt;
-
-    public User getCreatedBy() {
-        return createdBy;
+    public User() {
     }
 
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Board() {
-    }
-
-    public Board(UUID id, String name, List<Columnn> columns, List<Task> tasks, User createdBy, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+    public User(UUID id, String name, String email, String password, List<Board> boards, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
         this.id = id;
         this.name = name;
-        this.columns = columns;
-        this.tasks = tasks;
-        this.createdBy = createdBy;
+        this.email = email;
+        this.password = password;
+        this.boards = boards;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -75,20 +64,28 @@ public class Board implements Auditable {
         this.name = name;
     }
 
-    public List<Columnn> getColumns() {
-        return columns;
+    public String getEmail() {
+        return email;
     }
 
-    public void setColumns(List<Columnn> columns) {
-        this.columns = columns;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Board> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(List<Board> boards) {
+        this.boards = boards;
     }
 
     public OffsetDateTime getCreatedAt() {
@@ -112,23 +109,23 @@ public class Board implements Auditable {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Board board = (Board) o;
-        return Objects.equals(id, board.id) && Objects.equals(name, board.name) && Objects.equals(columns, board.columns) && Objects.equals(tasks, board.tasks) && Objects.equals(createdBy, board.createdBy) && Objects.equals(createdAt, board.createdAt) && Objects.equals(updatedAt, board.updatedAt);
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(boards, user.boards) && Objects.equals(createdAt, user.createdAt) && Objects.equals(updatedAt, user.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, columns, tasks, createdBy, createdAt, updatedAt);
+        return Objects.hash(id, name, email, password, boards, createdAt, updatedAt);
     }
 
     @Override
     public String toString() {
-        return "Board{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", columns=" + columns +
-                ", tasks=" + tasks +
-                ", createdBy=" + createdBy +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", boards=" + boards +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
